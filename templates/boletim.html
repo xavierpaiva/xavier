@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+<div class="container">
+{% block content %}
+  <h2 class="mt-4 mb-4">Boletim</h2>
+
+  <div class="container">
+    <h4 class="mb-3">Selecione o ano:</h4>
+    <form action="{{url_for('boletim') }}" method="post">
+      <div class="form-group">
+        <select class="form-control" name="ano">
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+  </div>
+
+  {% if boletim_data %}
+    <table class="table mt-4">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Disciplina</th>
+          <th scope="col">N1</th>
+          <th scope="col">N2</th>
+          <th scope="col">N3</th>
+          <th scope="col">N4</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for disciplina in boletim_data %}
+          <tr>
+            <td>{{ disciplina['disciplina'] }}</td>
+            <td>{{ disciplina['nota_etapa_1']['nota'] }}</td>
+            <td>{{ disciplina['nota_etapa_2']['nota'] }}</td>
+            <td>{{ disciplina['nota_etapa_3']['nota'] }}</td>
+            <td>{{ disciplina['nota_etapa_4']['nota'] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}
+</div>
